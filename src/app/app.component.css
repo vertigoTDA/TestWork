@@ -1,0 +1,25 @@
+.header {
+    padding: 5px;
+    width: 100%;
+    background-color: rgb(0, 132, 255);
+}
+
+#body {
+    background-color: rgb(231, 236, 240);
+}
+
+#headerLogo {
+    height: 50px;
+    width: 50px;
+    margin-right: 0px;
+    float: right;
+}
+
+#headerText {
+    font-size: 24px;
+}
+
+#edrpou {
+    font-style: italic;
+    font-weight: lighter;
+}
