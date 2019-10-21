@@ -1,27 +1,35 @@
 <div class="row">
-    <div class="header col-xs-12">
-      <div class="col-xs-4">
-        <div class="row">
-          <div class="col-xs-6 col-sm-4">
-            <img id="headerLogo" src="https://smida-dev.test.idoc.com.ua/assets/images/55563eac.svr.png">
-          </div>
-          <div class="row col-xs-6 col-sm-4">
-            <div class="col-xs-12">СИСТЕМА ВЕДЕННЯ</div>
-            <div id="headerText" class="col-xs-12">РЕЄСТРІВ</div>
-          </div>
+  <div class="header col-xs-12">
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-6 col-sm-4">
+          <img id="headerLogo" src="https://smida-dev.test.idoc.com.ua/assets/images/55563eac.svr.png">
+        </div>
+        <div class="row col-xs-6 col-sm-4">
+          <div class="col-xs-12">СИСТЕМА ВЕДЕННЯ</div>
+          <div id="headerText" class="col-xs-12">РЕЄСТРІВ</div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div id="body" *ngIf="apiTableData">
-    <br />
+</div>
+
+<div id="body" *ngIf="apiTableData">
+  <div class="tables_body">
     <div class="row">
-      <div><a href=""></a></div>
-    </div>
-    <div class="row">
-      <div id="edrpou" class="col-xs-6">Код за ЄДРПОУ : {{apiTableData.oCommonInfoBot.code}}</div>
-      <div class="col-xs-6"></div>
+      <div class="col-xs-8">
+        <a> &lt; До результатів пошуку</a><br />
+        <div id="edrpou">Код за ЄДРПОУ : {{apiTableData.oCommonInfoBot.code}}</div>
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control mr-sm-2" type="search" placeholder="Пошук за ЄДРПОУ та назвою" aria-label="Search">
+      </div>
+      <div class="col-xs-1">
+        <button class="btn btn-primary">{{date | date: 'dd.MM.yyyy'}}</button>
+      </div>
+      <div class="col-xs-1">
+        <button class="btn btn-outline-secondary">Профіль</button>
+      </div>
     </div>
     <table class="table">
       <thead>
@@ -100,6 +108,19 @@
       </tbody>
     </table>
   </div>
-  
-  
-  <router-outlet></router-outlet>
+
+  <br />
+
+  <div class="tables_body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col-xs-11">ПУБЛІЧНІ ПРОПОЗИЦІЇ</th>
+          <th scope="col-xs-1">&or;</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>

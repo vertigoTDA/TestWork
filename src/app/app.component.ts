@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class AppComponent implements OnInit{
   private apiTableData: any;
+  private date = new Date();
 
   constructor(
     private httpClient: HttpClient
