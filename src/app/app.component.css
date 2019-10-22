@@ -30,3 +30,8 @@
     font-style: italic;
     font-weight: lighter;
 }
+
+.publicOffers {
+    font-size: 20px;
+    color: rgb(0, 132, 255);
+}

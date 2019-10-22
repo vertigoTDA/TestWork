@@ -8,20 +8,17 @@ import { GetApiDataService } from './get-api-data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
 export class AppComponent implements OnInit {
   private apiTableData: any;
   private publicOffersData: any = null;
-  private aListRegistryStatus: boolean = false;       //for  aListRegistryCheck() method
+  private aListRegistryStatus: boolean = false;
   private publicOffersStatus: boolean = false;
   private date = new Date();
 
   constructor(
     private httpClient: HttpClient,
     private getApiDataService: GetApiDataService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.getDataFromServer();
@@ -38,38 +35,33 @@ export class AppComponent implements OnInit {
       (result) => {
         this.apiTableData = result;
         this.aListRegistryCheck();
-        console.log('get data from server method : ' + result);
       }
     );
   }
 
   aListRegistryCheck() {
     if (this.apiTableData.aListRegistry[0].nID === 36 &&
-      this.apiTableData.aListRegistry[0].sID_Registry ==="PublicOffering" &&
-      this.apiTableData.aListRegistry[0].sName === "Публічні пропозиції")
-      {
-        this.aListRegistryStatus = true;
-      } else {
-        this.aListRegistryStatus = false;
-      }
-  }
-
-  triggerPublicOffers() {
-    this.publicOffersStatus = !this.publicOffersStatus;
-    if (!this.publicOffersData){
-      this.getApiData();
-      console.log('data from trigger' + this.publicOffersData);
+      this.apiTableData.aListRegistry[0].sID_Registry === "PublicOffering" &&
+      this.apiTableData.aListRegistry[0].sName === "Публічні пропозиції") {
+      this.aListRegistryStatus = true;
+    } else {
+      this.aListRegistryStatus = false;
     }
   }
 
-  getApiData(){
-    this.getApiDataService.getData().subscribe((data)=> {
-      this.publicOffersData = data;
-      console.log('get api from service : ' + data);
-    })
+  triggerPublicOffers() {
+    if (!this.publicOffersData) {
+      this.getApiData();
+    }
+    setTimeout(() => {
+      this.publicOffersStatus = !this.publicOffersStatus;
+    }, 2000);
   }
 
-  check(){
-    console.log(this.publicOffersData[0]);
+  getApiData() {
+    this.getApiDataService.getData().subscribe((data: any) => {
+      this.publicOffersData = data;
+    });
   }
+
 }
