@@ -50,15 +50,19 @@
           <td>{{apiTableData.oCommonInfoBot.ceo_name}}</td>
           <td>{{apiTableData.oCommonInfo.oCEO.sCeoName}}</td>
         </tr>
-        <tr>
-          <th scope="row">Статутний капітал</th>
+        <tr (click)="beneficiariesTrigger()">
+          <th scope="row">
+            Статутний капітал
+            <span *ngIf="beneficiariesStatus">&#9650;</span>
+            <span *ngIf="!beneficiariesStatus">&#9660;</span>
+          </th>
           <td>{{apiTableData.oCommonInfoBot.totalcapital}}</td>
           <td>{{apiTableData.oCommonInfo.nSizeCharterCapital}}</td>
         </tr>
-        <tr>
-          <th scope="row">Засновники</th>
-          <td>{{apiTableData.oCommonInfoBot.beneficiaries}}</td>
-          <td></td>
+        <tr *ngFor="let data of apiTableData.oCommonInfoBot.beneficiaries; let i=index">
+            <th *ngIf="beneficiariesStatus" scope="row col-xs-4">Засновники</th>
+            <td *ngIf="beneficiariesStatus" scope="col-xs-4">{{apiTableData.oCommonInfoBot.beneficiaries[i].title}}</td>
+            <td *ngIf="beneficiariesStatus" scope="col-xs-4">{{apiTableData.oCommonInfoBot.beneficiaries[i].capital}}</td>
         </tr>
         <tr>
           <th scope="row">Місцезнаходження</th>
@@ -126,59 +130,29 @@
   </div>
 
   <div class="tables_body" *ngIf="publicOffersStatus && publicOffersData">
-    <table class="table">
-      <thead>
-        <tr style="background-color:rgb(248, 241, 232);">
-          <th scope="col-xs-3">Ім'я/назва особи, яка здійснює публічну пропозицію</th>
-          <th scope="col-xs-2">Дата початку публічної пропозиції</th>
-          <th scope="col-xs-2">Дата закінчення публічної пропозиції</th>
-          <th scope="col-xs-2">Цінні папери</th>
-          <th scope="col-xs-2">Статус пропозиції</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="col-xs-3">{{publicOffersData[0].sNameOfferent.value}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[0].sDateEndPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[0].aoListEvents.value.sName}}</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-        <tr>
-          <th scope="col-xs-3">{{publicOffersData[1].sNameOfferent.value}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[1].sDateEndPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[1].aoListEvents.value.sName}}</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-        <tr>
-          <th scope="col-xs-3">{{publicOffersData[2].sNameOfferent.value}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[2].sDateEndPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[2].aoListEvents.value.sName}}</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-        <tr>
-          <th scope="col-xs-3">{{publicOffersData[3].sNameOfferent.value}}</th>
-          <th scope="col-xs-2">{{publicOffersData[3].sDateBeginPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[3].aoListEvents.value.sName}}</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-        <tr>
-          <th scope="col-xs-3">{{publicOffersData[4].sNameOfferent.value}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[4].sDateEndPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
-          <th scope="col-xs-2"></th>
-          <th scope="col-xs-2">{{publicOffersData[4].aoListEvents.value.sName}}</th>
-          <th scope="col-xs-1"></th>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-body">
+      <table class="table">
+        <thead>
+          <tr style="background-color:rgb(248, 241, 232);">
+            <th scope="col-xs-3">Ім'я/назва особи, яка здійснює публічну пропозицію</th>
+            <th scope="col-xs-2">Дата початку публічної пропозиції</th>
+            <th scope="col-xs-2">Дата закінчення публічної пропозиції</th>
+            <th scope="col-xs-2">Цінні папери</th>
+            <th scope="col-xs-2">Статус пропозиції</th>
+            <th scope="col-xs-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of publicOffersData">
+            <th scope="col-xs-3">{{data.sNameOfferent.value}}</th>
+            <th scope="col-xs-2">{{data.sDateBeginPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
+            <th scope="col-xs-2">{{data.sDateEndPublicOffering.value | date: 'dd.MM.yyyy'}}</th>
+            <th scope="col-xs-2">{{data.sTypeStockPaper}}</th>
+            <th scope="col-xs-2">{{data.aoListEvents.value.sName}}</th>
+            <th scope="col-xs-1"></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

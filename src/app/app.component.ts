@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   private publicOffersData: any = null;
   private aListRegistryStatus: boolean = false;
   private publicOffersStatus: boolean = false;
+  private beneficiariesStatus: boolean = false;
   private date = new Date();
 
   constructor(
@@ -55,12 +56,19 @@ export class AppComponent implements OnInit {
     }
     setTimeout(() => {
       this.publicOffersStatus = !this.publicOffersStatus;
-    }, 2000);
+    }, 250);
+  }
+
+  beneficiariesTrigger() {
+    this.beneficiariesStatus = !this.beneficiariesStatus;
   }
 
   getApiData() {
     this.getApiDataService.getData().subscribe((data: any) => {
       this.publicOffersData = data;
+      for (let i = 0; i<data.length; i++){
+        console.log(data[i]);
+      }
     });
   }
 
